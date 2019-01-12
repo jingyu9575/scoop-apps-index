@@ -2,6 +2,7 @@ language: python
 dist: xenial
 python: '3.7'
 script: 'python build.py'
+before_deploy: sed -i '/^\/data.json$/d' .gitignore
 deploy:
   provider: pages
   skip-cleanup: true
