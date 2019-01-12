@@ -101,7 +101,7 @@ main {
 .name {
 	font-family: Consolas, monaco, monospace;
 	font-size: 24px;
-	margin-inline-end: 8px;
+	margin-right: 8px;
 	color: mediumblue;
 	word-wrap: break-word;
 }
@@ -109,7 +109,7 @@ main {
 .version {
 	font-size: 15px;
 	color: blue;
-	margin-inline-end: 6px;
+	margin-right: 6px;
 }
 
 .description {
