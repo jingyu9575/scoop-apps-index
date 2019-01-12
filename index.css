@@ -158,6 +158,11 @@ main {
 	font-size: 12px;
 }
 
+.command::selection {
+	color: black;
+	background: lightgreen;
+}
+
 .action:not(:hover) > .command:not(:hover) {
 	display: none;
 }
