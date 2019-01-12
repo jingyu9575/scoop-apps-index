@@ -1,0 +1,171 @@
+body {
+	display: flex;
+	flex-direction: column;
+	margin: 0;
+	background-color: white;
+	color: black;
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+a {
+	color: mediumblue;
+	text-decoration: none;
+}
+
+[hidden] {
+	display: none !important;
+}
+
+::placeholder {
+	color: darkgray;
+}
+
+.feather {
+	width: 1em;
+	height: 1em;
+	stroke: currentColor;
+	stroke-width: 2;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	fill: none;
+}
+
+header {
+	display: flex;
+	background: #fafafa;
+	border-bottom: 1px solid #efefef;
+	align-items: center;
+}
+
+#logo {
+	font-size: 24px;
+	margin: 8px 16px;
+	flex: 1;
+}
+
+#search {
+	height: 32px;
+	width: 600px;
+	box-sizing: border-box;
+	font-size: 20px;
+	margin: 8px 0;
+	border: 1px solid #d7d7d7;
+	padding: 0 4px;
+	font-family: Consolas, monaco, monospace;
+}
+
+#search:focus {
+	border-color: mediumblue;
+}
+
+header nav {
+	flex: 1;
+	display: flex;
+	justify-content: end;
+	margin: 8px 16px;
+}
+
+main {
+	display: flex;
+	flex-direction: column;
+}
+
+#apps {
+	display: flex;
+	flex-direction: column;
+	align-self: center;
+	width: 600px;
+	margin-top: 12px;
+}
+
+.app {
+	display: flex;
+	padding: 8px 16px;
+	border: 1px solid #d7d7d7;
+	margin-bottom: 8px;
+}
+
+.app-info {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	overflow-x: hidden;
+	justify-content: center;
+}
+
+.app-info-title {
+	display: flex;
+	align-items: center;
+}
+
+.name {
+	font-family: Consolas, monaco, monospace;
+	font-size: 24px;
+	margin-inline-end: 8px;
+	color: mediumblue;
+	word-wrap: break-word;
+}
+
+.version {
+	font-size: 15px;
+	color: blue;
+	margin-inline-end: 6px;
+}
+
+.description {
+	font-size: 15px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.description:not(:empty) {
+	margin-top: 6px;
+}
+
+.app-actions {
+	display: flex;
+	font-size: 24px;
+	align-items: center;
+}
+
+.action {
+	color: blue;
+	display: flex;
+	padding: 4px;
+	margin: 0;
+	position: relative;
+}
+
+.action:hover {
+	background-color: #efefef;
+}
+
+.action:active {
+	background-color: #e4e4e4;
+}
+
+.command {
+	position: absolute;
+	top: 100%;
+	right: 0;
+	padding: 6px 6px;
+	background-color: black;
+	color: #cccccc;
+	border: 1px solid #c0c0c0;
+	white-space: nowrap;
+	font-family: Consolas, monaco, monospace;
+	font-size: 12px;
+}
+
+.action:not(:hover) > .command:not(:hover) {
+	display: none;
+}
+
+.bucket {
+	align-self: flex-start;
+	background-color: #fff8dc;
+	padding: 2px 12px;
+	margin-bottom: 8px;
+	border: 1px solid #ffeb8e;
+}
