@@ -14,7 +14,7 @@ def load_buckets(url, subdir='.', load_json=None):
     tmp_dir = 'bucket-temp'
     subprocess.check_call(['git', 'clone', '--depth=1', url, tmp_dir])
 
-    for json_file in glob.glob(os.path.join(tmp_dir, subdir, '*.json')):
+    for json_file in sorted(glob.glob(os.path.join(tmp_dir, subdir, '*.json'))):
         with open(json_file, 'r') as file:
             manifest = json.loads(file.read().replace(
                 '\r', ' ').replace('\n', ' '))
