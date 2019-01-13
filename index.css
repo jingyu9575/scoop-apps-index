@@ -174,3 +174,29 @@ main {
 	margin-bottom: 8px;
 	border: 1px solid #ffeb8e;
 }
+
+@media only screen and (max-width: 960px) {
+	header {
+		display: grid;
+		grid-template-columns: auto 1fr auto;
+	}
+	#logo {
+		grid-area: 1 / 1;
+		margin: 4px 8px;
+	}
+	#search {
+		width: auto;
+		grid-area: 2 / 1 / 2 / 4;
+		margin: 0 2px 2px 2px;
+	}
+	header nav {
+		grid-area: 1 / 3;
+	}
+	#apps {
+		width: 100%;
+	}
+	.app {
+		margin-bottom: 0;
+		border-bottom: none;
+	}
+}
