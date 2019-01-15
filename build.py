@@ -5,6 +5,14 @@ import shutil
 import collections
 import os
 from time import sleep
+import stat
+
+
+def rmtree_onerror(func, path, exc_info):
+    if os.access(path, os.W_OK):
+        raise
+    os.chmod(path, stat.S_IWUSR)
+    func(path)
 
 
 def load_buckets(url, subdir='.', load_json=None):
@@ -27,14 +35,7 @@ def load_buckets(url, subdir='.', load_json=None):
             json_content = json.load(
                 file, object_pairs_hook=collections.OrderedDict)
 
-    sleep_time = 0.1
-    for i in range(10):
-        try:
-            shutil.rmtree(tmp_dir)
-            break
-        except PermissionError:
-            sleep(sleep_time)  # workaround error in WSL
-            sleep_time *= 1.5
+    shutil.rmtree(tmp_dir, onerror=rmtree_onerror)
 
     return result, json_content
 
