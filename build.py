@@ -24,10 +24,14 @@ def load_buckets(url, subdir='.', load_json=None):
 
     for json_file in sorted(glob.glob(os.path.join(tmp_dir, subdir, '*.json'))):
         with open(json_file, 'r') as file:
-            manifest = json.loads(file.read().replace(
-                '\r', ' ').replace('\n', ' '))
-            result['apps'][os.path.splitext(os.path.basename(json_file))[0]] = {
-                k: manifest.get(k) for k in ['version', 'homepage', 'description']}
+            try:
+                manifest = json.loads(file.read().replace(
+                    '\r', ' ').replace('\n', ' ').replace('\t', ' '))
+                result['apps'][os.path.splitext(os.path.basename(json_file))[0]] = {
+                    k: manifest.get(k) for k in ['version', 'homepage', 'description']}
+            except:
+                print("Error on processing manifest:", json_file)
+                raise
 
     json_content = None
     if load_json is not None:
