@@ -10,19 +10,21 @@ import stat
 
 def rmtree_onerror(func, path, exc_info):
     if os.access(path, os.W_OK):
+        # pylint: disable=E0704
         raise
     os.chmod(path, stat.S_IWUSR)
     func(path)
 
 
-def load_buckets(url, subdir='.', load_json=None):
-    result = {'apps': {}, 'url': url,
-              'subdir': subdir if subdir != '.' else None}
-
+def load_buckets(url, load_json=None):
     tmp_dir = 'bucket-temp'
     subprocess.check_call(['git', 'clone', '--depth=1', url, tmp_dir])
+    subdir = 'bucket'
+    if not os.path.isdir(os.path.join(tmp_dir, subdir)):
+        subdir = None
+    result = {'apps': {}, 'url': url, 'subdir': subdir}
 
-    for json_file in sorted(glob.glob(os.path.join(tmp_dir, subdir, '*.json'))):
+    for json_file in sorted(glob.glob(os.path.join(tmp_dir, subdir or '', '*.json'))):
         with open(json_file, 'r') as file:
             try:
                 manifest = json.loads(file.read().replace(
@@ -47,7 +49,7 @@ def load_buckets(url, subdir='.', load_json=None):
 def main():
     result = {}
     result['main'], bucket_urls = load_buckets(
-        'https://github.com/lukesampson/scoop.git', 'bucket', 'buckets.json')
+        'https://github.com/lukesampson/scoop.git', 'buckets.json')
 
     for bucket in bucket_urls:
         result[bucket], _ = load_buckets(bucket_urls[bucket])
