@@ -1,9 +1,25 @@
+function getSettings(key) {
+	try {
+		return JSON.parse(localStorage.getItem(key))
+	} catch (e) { }
+	return null
+}
+
+function putSettings(key, value) {
+	try {
+		return localStorage.setItem(key, JSON.stringify(value))
+	} catch (e) { }
+}
+
 void async function () {
+	const disabledBuckets = getSettings('disabledBuckets') || {}
+
 	const appsDiv = document.getElementById('apps')
 	const appTemplate = document.getElementById('app-template')
 
 	const data = await (await fetch('data.json')).json()
 	for (const bucket in data) {
+		if (disabledBuckets[bucket]) continue
 		const { url, subdir, apps } = data[bucket]
 		const prefix = url.replace(/.git$/, '') + '/blob/master/' +
 			(subdir ? subdir + '/' : '')
@@ -61,4 +77,41 @@ void async function () {
 			updateSearch()
 		}
 	})
+
+	const settingsContainer = document.getElementById('settings-container')
+	const settingsDiv = document.getElementById('settings')
+	document.getElementById('open-settings').addEventListener('click', e => {
+		e.preventDefault()
+		settingsDiv.classList.toggle('open')
+	})
+	document.addEventListener('click', e => {
+		if (!settingsContainer.contains(e.target) &&
+			settingsDiv.classList.contains('open'))
+			settingsDiv.classList.remove('open')
+	})
+
+	const settingsBuckets = document.getElementById('settings-buckets')
+	const settingsBucketTemplate = document.getElementById('settings-bucket-template')
+	const settingsReload = document.getElementById('settings-reload')
+	settingsReload.addEventListener('click', e => {
+		e.preventDefault()
+		location.reload()
+	})
+
+	for (const bucket in data) {
+		const frag = document.importNode(settingsBucketTemplate.content, true)
+		const input = frag.querySelector('input')
+		input.checked = !disabledBuckets[bucket]
+		input.addEventListener('change', () => {
+			if (input.checked)
+				delete disabledBuckets[bucket]
+			else
+				disabledBuckets[bucket] = true
+			putSettings('disabledBuckets', disabledBuckets)
+			settingsReload.hidden = false
+		})
+		frag.querySelector('span').textContent = bucket
+		settingsBuckets.appendChild(frag)
+	}
+
 }()

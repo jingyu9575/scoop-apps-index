@@ -15,7 +15,23 @@
 			<a href=".">Scoop Apps</a>
 		</div>
 		<input type="text" id='search' placeholder="Search" autofocus>
-		<nav></nav>
+		<nav>
+			<div id='settings-container'>
+				<a href="#" id='open-settings'><span>Settings</span></a>
+				<div id='settings'>
+					<div id='settings-content'>
+						<div>Buckets:</div>
+						<div id='settings-buckets'></div>
+					</div>
+					<a id='settings-reload' href="#" hidden>
+						<svg class="feather">
+							<use xlink:href="images/feather-sprite.svg#refresh-cw" />
+						</svg>
+					</a>
+				</div>
+			</div>
+
+		</nav>
 	</header>
 
 	<main>
@@ -60,6 +76,9 @@
 					</a>
 				</div>
 			</div>
+		</template>
+		<template id='settings-bucket-template'>
+			<label class="settings-bucket"><input type="checkbox"><span></span></label>
 		</template>
 	</main>
 
