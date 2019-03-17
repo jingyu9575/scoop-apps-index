@@ -11,6 +11,15 @@ function putSettings(key, value) {
 	} catch (e) { }
 }
 
+let searchParams
+function loadSearchParams() {
+	searchParams = new URLSearchParams(location.hash.replace(/^#/, ''))
+}
+loadSearchParams()
+function updateSearchParams() {
+	history.pushState(null, null, '#' + searchParams.toString())
+}
+
 void async function () {
 	const disabledBuckets = getSettings('disabledBuckets') || {}
 
@@ -62,6 +71,10 @@ void async function () {
 		for (const node of appsDiv.getElementsByClassName('app')) {
 			node.hidden = !node.dataset.name.includes(keyword)
 		}
+		if ((searchParams.get('q') || '') !== keyword) {
+			searchParams.set('q', keyword)
+			updateSearchParams()
+		}
 	}
 
 	search.addEventListener('input', () => {
@@ -77,6 +90,15 @@ void async function () {
 			updateSearch()
 		}
 	})
+
+	function onPopState() {
+		loadSearchParams()
+		search.value = searchParams.get('q') || ''
+		updateSearch()
+	}
+	onPopState()
+	window.addEventListener('popstate', onPopState)
+
 
 	const settingsContainer = document.getElementById('settings-container')
 	const settingsDiv = document.getElementById('settings')
