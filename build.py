@@ -25,7 +25,7 @@ def load_buckets(url, load_json=None):
     result = {'apps': {}, 'url': url, 'subdir': subdir}
 
     for json_file in sorted(glob.glob(os.path.join(tmp_dir, subdir or '', '*.json'))):
-        with open(json_file, 'r') as file:
+        with open(json_file, 'r', encoding='utf-8') as file:
             try:
                 manifest = json.loads(file.read().replace(
                     '\r', ' ').replace('\n', ' ').replace('\t', ' '))
@@ -53,6 +53,12 @@ def main():
 
     for bucket in bucket_urls:
         result[bucket], _ = load_buckets(bucket_urls[bucket])
+
+    with open('additional_buckets.json', 'r') as file:
+        bucket_urls = json.load(
+            file, object_pairs_hook=collections.OrderedDict)
+        for bucket in bucket_urls:
+            result[bucket], _ = load_buckets(bucket_urls[bucket])
 
     with open('data.json', 'w') as file:
         json.dump(result, file)
