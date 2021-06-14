@@ -1,0 +1,254 @@
+body {
+	display: flex;
+	flex-direction: column;
+	margin: 0;
+	background-color: white;
+	color: black;
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+a {
+	color: mediumblue;
+	text-decoration: none;
+}
+
+[hidden] {
+	display: none !important;
+}
+
+::placeholder {
+	color: darkgray;
+}
+
+.feather {
+	width: 1em;
+	height: 1em;
+	stroke: currentColor;
+	stroke-width: 2;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	fill: none;
+}
+
+header {
+	display: flex;
+	background: #fafafa;
+	border-bottom: 1px solid #efefef;
+	align-items: center;
+}
+
+#logo {
+	font-size: 24px;
+	margin: 8px 16px;
+	flex: 1;
+}
+
+#search {
+	height: 32px;
+	width: 600px;
+	box-sizing: border-box;
+	font-size: 20px;
+	margin: 8px 0;
+	border: 1px solid #d7d7d7;
+	padding: 0 4px;
+	font-family: Consolas, monaco, monospace;
+}
+
+#search:focus {
+	border-color: mediumblue;
+}
+
+header nav {
+	flex: 1;
+	display: flex;
+	justify-content: end;
+	align-self: stretch;
+	margin: 0 16px;
+}
+
+#settings-container {
+	position: relative;
+	display: flex;
+}
+
+#open-settings {
+	display: flex;
+	align-items: center;
+}
+
+#settings {
+	position: absolute;
+	z-index: 2;
+	top: 100%;
+	right: 0;
+	max-width: 100vw;
+	background: white;
+	border: 1px solid lightgray;
+	box-shadow: 0 2px 4px lightgray;
+}
+
+#settings-content {
+	padding: 8px;
+}
+
+#settings:not(.open) {
+	visibility: hidden;
+}
+
+#settings-buckets {
+	display: flex;
+	flex-direction: column;
+	-webkit-user-select: none;
+}
+
+.settings-bucket {
+	display: flex;
+	align-items: center;
+}
+
+#settings-reload {
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	border-top: 1px solid lightgray;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 6px;
+}
+
+main {
+	display: flex;
+	flex-direction: column;
+}
+
+#apps {
+	display: flex;
+	flex-direction: column;
+	align-self: center;
+	width: 600px;
+	margin-top: 12px;
+}
+
+.app {
+	display: flex;
+	padding: 8px 16px;
+	border: 1px solid #d7d7d7;
+	margin-bottom: 8px;
+}
+
+.app-info {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	overflow-x: hidden;
+	justify-content: center;
+}
+
+.app-info-title {
+	display: flex;
+	align-items: center;
+}
+
+.name {
+	font-family: Consolas, monaco, monospace;
+	font-size: 24px;
+	margin-right: 8px;
+	color: mediumblue;
+	word-wrap: break-word;
+}
+
+.version {
+	font-size: 15px;
+	color: blue;
+	margin-right: 6px;
+}
+
+.description {
+	font-size: 15px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.description:not(:empty) {
+	margin-top: 6px;
+}
+
+.app-actions {
+	display: flex;
+	font-size: 24px;
+	align-items: center;
+}
+
+.action {
+	color: blue;
+	display: flex;
+	padding: 4px;
+	margin: 0;
+	position: relative;
+}
+
+.action:hover {
+	background-color: #efefef;
+}
+
+.action:active {
+	background-color: #e4e4e4;
+}
+
+.command {
+	position: absolute;
+	top: 100%;
+	right: 0;
+	padding: 6px 6px;
+	background-color: black;
+	color: #cccccc;
+	border: 1px solid #c0c0c0;
+	white-space: nowrap;
+	font-family: Consolas, monaco, monospace;
+	font-size: 12px;
+}
+
+.command::selection {
+	color: black;
+	background: lightgreen;
+}
+
+.action:not(:hover) > .command:not(:hover) {
+	display: none;
+}
+
+.bucket {
+	align-self: flex-start;
+	background-color: #fff8dc;
+	padding: 2px 12px;
+	margin-bottom: 8px;
+	border: 1px solid #ffeb8e;
+}
+
+@media only screen and (max-width: 960px) {
+	header {
+		display: grid;
+		grid-template-columns: auto 1fr auto;
+	}
+	#logo {
+		grid-area: 1 / 1;
+		margin: 4px 8px;
+	}
+	#search {
+		width: auto;
+		grid-area: 2 / 1 / 2 / 4;
+		margin: 0 2px 2px 2px;
+	}
+	header nav {
+		grid-area: 1 / 3;
+	}
+	#apps {
+		width: 100%;
+	}
+	.app {
+		margin-bottom: 0;
+		border-bottom: none;
+	}
+}

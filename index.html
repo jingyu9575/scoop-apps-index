@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Scoop Apps Index</title>
+	<link rel="icon" href="favicon.png">
+	<link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+	<header>
+		<div id='logo'>
+			<a href=".">Scoop Apps</a>
+		</div>
+		<input type="text" id='search' placeholder="Search" autofocus>
+		<nav>
+			<div id='settings-container'>
+				<a href="#" id='open-settings'><span>Settings</span></a>
+				<div id='settings'>
+					<div id='settings-content'>
+						<div>Buckets:</div>
+						<div id='settings-buckets'></div>
+					</div>
+					<a id='settings-reload' href="#" hidden>
+						<svg class="feather">
+							<use xlink:href="images/feather-sprite.svg#refresh-cw" />
+						</svg>
+					</a>
+				</div>
+			</div>
+
+		</nav>
+	</header>
+
+	<main>
+		<div id='apps'></div>
+		<template id='app-template'>
+			<div class="app">
+				<div class="app-info">
+					<div class="app-info-title">
+						<div class="name"></div>
+						<div class="version"></div>
+						<a class="action manifest" href="#" title="Manifest">
+							<svg class="feather">
+								<use xlink:href="images/feather-sprite.svg#code" />
+							</svg>
+						</a>
+						<a class="action homepage" href="#" title="Homepage">
+							<svg class="feather">
+								<use xlink:href="images/feather-sprite.svg#home" />
+							</svg>
+						</a>
+					</div>
+					<div class="description"></div>
+				</div>
+				<div class="app-actions">
+					<a class="action install" href="#" title="Install">
+						<svg class="feather">
+							<use xlink:href="images/feather-sprite.svg#plus" />
+						</svg>
+						<div class="command"></div>
+					</a>
+					<a class="action update" href="#" title="Update">
+						<svg class="feather">
+							<use xlink:href="images/feather-sprite.svg#arrow-up" />
+						</svg>
+						<div class="command"></div>
+					</a>
+					<a class="action uninstall" href="#" title="Uninstall">
+						<svg class="feather">
+							<use xlink:href="images/feather-sprite.svg#minus" />
+						</svg>
+						<div class="command"></div>
+					</a>
+				</div>
+			</div>
+		</template>
+		<template id='settings-bucket-template'>
+			<label class="settings-bucket"><input type="checkbox"><span></span></label>
+		</template>
+	</main>
+
+	<script src="index.js"></script>
+</body>
+
+</html>
